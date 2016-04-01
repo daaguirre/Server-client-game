@@ -1,0 +1,39 @@
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include "glut.h"
+#define MAX_MSJ 240
+
+int main()
+{
+	int t;	
+	char *tuberia="/tmp/logger";
+	char msj[MAX_MSJ];
+	if (mkfifo(tuberia,0666)<0){
+		perror("Error al crear la tuberia\n");
+		return -1;
+	}
+	//abre la tuberia	
+	t = open(tuberia,O_RDONLY);
+	if(t==-1){
+		perror("Error al abrir la tuberia\n");
+		return -1;
+	}
+	//lee el mensaje desde la tuberia y lo almacena
+	while(1){	
+		read(t,msj,MAX_MSJ);
+		printf("Recibido: %s\n",msj);
+	}
+        //cerramos la tuberia 
+	close(t);
+	//borramos tuberia
+	unlink(tuberia);
+	
+	return 0;	
+	
+}
+
+
+

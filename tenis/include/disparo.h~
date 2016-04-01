@@ -1,0 +1,13 @@
+#include "plano.h"
+#include "vector2D.h"
+
+class Disparo:public plano
+{
+public:
+	Vector2D velocidad;
+
+	Disparo();
+	virtual ~Disparo();
+
+	void Mueve(float t);
+};

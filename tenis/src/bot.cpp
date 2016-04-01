@@ -1,0 +1,50 @@
+#include "DatosMemCompartida.h"
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+
+
+int main() {	
+	void *org;
+	DatosMemCompartida *datos;
+	int fd;
+	char *p;
+	struct stat bstat;
+
+	if((fd=open("/tmp/bot.txt", /*O_CREAT|*/O_RDWR,0777))<0)
+		perror("Error al abrir bot en bot.cpp");	
+	if (fstat(fd, &bstat)<0) {
+    		perror("Error en fstat del fichero"); close(fd);
+    		return -1;
+  	}
+	printf("tamanio fichero %ld \n",bstat.st_size);
+	//Proyeccion del fichero
+	if((org=mmap((caddr_t) 0,bstat.st_size, PROT_READ |  PROT_WRITE ,MAP_SHARED, fd, 0))==MAP_FAILED){ 
+    		perror("Error en la proyeccion del fichero"); close(fd);
+		return -1;
+    	}
+	close(fd);//se cierra el fichero
+	datos=static_cast<DatosMemCompartida*>(org);	
+	while(1)
+	{	
+		usleep(25000);
+		float posJugador1=((datos->raqueta1.y2-datos->raqueta1.y1)/2)+datos->raqueta1.y1;//la posicion de la raqueta 1 se tomara referente a su centro
+		if ((datos->esfera.centro.y)>posJugador1)
+		{
+			datos->accion=1;
+		}
+		else
+		{
+			if((datos->esfera.centro.y)<posJugador1){
+				datos->accion=-1;
+			}
+			else datos->accion=0;
+		}
+		
+
+	}
+	
+	
+}

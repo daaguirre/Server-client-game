@@ -1,0 +1,29 @@
+#include "Disparo.h"
+
+Disparo::Disparo(float a1,float b1,float a2, float b2)
+{
+ 	x1=a1+1;
+	x2=a2-1;
+	y1=b1+1;
+	y2=b2-1;
+	velocidad.x=2;
+
+}
+
+Disparo::~Disparo()
+{
+
+}
+
+void Disparo::Mueve(float t)
+{
+	x1=x1+velocidad.x*t;
+	x2=x2+velocidad.x*t;
+}
+
+
+
+
+
+
+

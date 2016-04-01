@@ -1,0 +1,68 @@
+// Mundo.h: interface for the CMundo class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#if !defined(AFX_MUNDO_H__9510340A_3D75_485F_93DC_302A43B8039A__INCLUDED_)
+#define AFX_MUNDO_H__9510340A_3D75_485F_93DC_302A43B8039A__INCLUDED_
+
+#include <vector>
+#include "Plano.h"
+#include "glut.h"
+
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+
+#include "Esfera.h"
+#include "Raqueta.h"
+#include "ListaDisparos.h"
+#include "DatosMemCompartida.h"
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include "Socket.h"
+
+
+
+
+class MundoCliente  
+{
+public:
+	void Init();
+	MundoCliente();
+	virtual ~MundoCliente();	
+	
+	void InitGL();	
+	void OnKeyboardDown(unsigned char key, int x, int y);
+	void OnTimer(int value);
+	void OnDraw();
+	void FinDeJuego();	
+
+	Esfera esfera;	
+	std::vector<Plano> paredes;
+	Plano fondo_izq;
+	Plano fondo_dcho;
+	Raqueta jugador1;
+	Raqueta jugador2;
+	ListaDisparos disparos1;
+	ListaDisparos disparos2;
+	DatosMemCompartida datos1;
+	DatosMemCompartida *datos2;
+	
+	struct stat bstat;
+	int puntos1;
+	int puntos2;
+	int numeroE;
+	char infoJugador1[200];
+	char infoJugador2[200];
+	int fd;	//entero para proyeccion en memoria
+	bool finDeJuego;
+	Socket com; //comunicacion con servidor
+	char msj[200];
+	char msj2[200];
+	
+};
+
+#endif // !defined(AFX_MUNDO_H__9510340A_3D75_485F_93DC_302A43B8039A__INCLUDED_)

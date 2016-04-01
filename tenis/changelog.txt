@@ -1,0 +1,26 @@
+Practica 1 SII-50635
+1)añadido movimiento de las raquetas y esfera
+	teclas "w" y "s" para mover raqueta jugador de la izquierda
+	teclas "o" y "l" para mover raqueta jugador de la derecha
+2)Añadido nuevas funcionalidades como aumento numero de pelotas segun avanza el juego
+  y las raquetas pueden disperar. Si un disparo choca sobre una raqueta esta se reduce de tamaño
+	2.1 Intrucciones de juego para disparo
+	- Para disparar desde la raqueta izquierda pulsar el boton "1"
+	- Para disparar desde la raqueta derecha pulsar boton "0"
+	- Cada jugador tiene 10 disparos para todo el juego. Si el disparo no choca sobre la raqueta rival 
+	  disminuye en uno la cantida de disparos disponibles. Si el disparo choca sobre la raqueta rival
+		reduce el tamaño de esta y el numero de disparos disponibles se mantiene. 
+	2.2 Intrucciones de juego para duplicacion de pelotas en juego
+	- El numero maximo de pelotas que puede haber en una partida es de 4
+	- Se empieza con una pelota y cada vez que la suma de la pntuacion de cada rival sea multiplo de 5 
+	  se añade una pelota en el juego 
+	
+3) Añadida funcionalidad de variacion de tamaño
+	-Cada vez que aparece una nueva pelota, el tamaño de esta cambia. Puede aumentar o reducirse.
+
+
+Fin Practica 1-SII!!
+
+Diego Alejandro Aguirre García
+50635
+ 
